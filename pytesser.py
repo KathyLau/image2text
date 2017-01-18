@@ -54,6 +54,21 @@ def image_file_to_string(filename, cleanup = cleanup_scratch_flag, graceful_erro
                         util.perform_cleanup(scratch_image_name, scratch_text_name_root)
         return text
         
+def test():
+        im3 = Image.open('bportal.png')
+        im3.load()
+        r, g, b, a = im3.split()
+        im3 = im3.convert('RGB')
+        im3.save("sched.pgm")
+        text = image_to_string(im3)
+        llist = text[text.find('Absent')+18: text.find('eSD')].split('\n')
+        s=''
+        for a in llist[1:-1]:
+                  a = a.split()
+                  room = a[-1]
+                  pd = a[-3]
+                  s += pd + room + '\n'
+        return s
 
 if __name__=='__main__':
         im3 = Image.open('bportal.png')
